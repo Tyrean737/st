@@ -21,3 +21,6 @@ The following additional bindings were added before I forked this:
 + Increase/decrease font size -- Shift+Alt+PageUp/PageDown
 + Return to default font size -- Shift+Alt+Home
 + Paste -- Shift+Insert
+
+If Transparency is not working try removing the 'vsync' line in
+~/.config/compton.conf and run 'compton -b' to start compton in the background.
