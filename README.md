@@ -1,5 +1,3 @@
-# Luke's build of st - the simple (suckless) terminal
-
 The [suckless terminal (st)](https://st.suckless.org/) with some additional features:
 
 + Adjustable transparency/alpha
@@ -22,11 +20,12 @@ The following additional bindings were added before I forked this:
 + Return to default font size -- Shift+Alt+Home
 + Paste -- Shift+Insert
 
+If Transparency is not working try removing the 'vsync' line in
+~/.config/compton.conf and run 'compton -b' to start compton in the background.
+
 ## Installation for newbs
 
 ```
 make
 sudo make install
 ```
-
-Obviously, `make` is required to build. `fontconfig` is required for the default build, since it asks `fontconfig` for your system monospace font.  It might be obvious, but `libX11` and `libXft` are required as well. Chances are, you have all of this installed already.
