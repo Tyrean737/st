@@ -19,4 +19,4 @@ Some additional bindings:
 + Paste -- Shift+Insert
 
 If Transparency is not working try removing the 'vsync' line in
-~/.config/compton.conf and run 'compton -b' to start compton in the background.
+~/.config/picom.conf and run 'picom -b' to start compton in the background.
