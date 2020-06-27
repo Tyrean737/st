@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "mono:pixelsize=12:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -98,32 +98,27 @@ float alpha = 0.8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
-	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
-
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
-
-	[255] = 0,
+        "#073642",  /*  0: black    */
+        "#dc322f",  /*  1: red      */
+        "#859900",  /*  2: green    */
+        "#b58900",  /*  3: yellow   */
+        "#268bd2",  /*  4: blue     */
+        "#d33682",  /*  5: magenta  */
+        "#2aa198",  /*  6: cyan     */
+        "#eee8d5",  /*  7: white    */
+        "#002b36",  /*  8: brblack  */
+        "#cb4b16",  /*  9: brred    */
+        "#586e75",  /* 10: brgreen  */
+        "#657b83",  /* 11: bryellow */
+        "#839496",  /* 12: brblue   */
+        "#6c71c4",  /* 13: brmagenta*/
+        "#93a1a1",  /* 14: brcyan   */
+        "#fdf6e3",  /* 15: brwhite  */
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
-	"black",
+	"black",   /* 256 -> bg */
+        "#00cc00", /* 257 -> fg */
+        "magenta"  /* 258 -> cursor */
 };
 
 
@@ -131,10 +126,10 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 258;
-static unsigned int defaultcs = 256;
-static unsigned int defaultrcs = 257;
+unsigned int defaultfg = 12;
+unsigned int defaultbg = 257;
+static unsigned int defaultcs = 14;
+static unsigned int defaultrcs = 15;
 
 /*
  * Default shape of cursor
@@ -236,10 +231,31 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
-	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
+	{ TERMMOD,              XK_P,           selpaste,       {.i =  0} },
+	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
+	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
+	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
+        { MODKEY,               XK_v,           clippaste,      {.i =  0} },
+        { MODKEY,               XK_p,           selpaste,       {.i =  0} },
+	{ MODKEY,               XK_Page_Up,     kscrollup,      {.i = -1} },
+        { MODKEY,               XK_Page_Down,   kscrolldown,    {.i = -1} },
+        { MODKEY,               XK_k,           kscrollup,      {.i =  1} },
+        { MODKEY,               XK_j,           kscrolldown,    {.i =  1} },
+        { MODKEY,               XK_Up,          kscrollup,      {.i =  1} },
+        { MODKEY,               XK_Down,        kscrolldown,    {.i =  1} },
+	{ MODKEY,            	XK_u,		kscrollup,      {.i = -1} },
+	{ MODKEY,            	XK_d,   	kscrolldown,    {.i = -1} },
+	{ MODKEY|ShiftMask,     XK_Up,          zoom,           {.f = +1} },
+        { MODKEY|ShiftMask,     XK_Down,        zoom,           {.f = -1} },
+        { MODKEY|ShiftMask,     XK_K,           zoom,           {.f = +1} },
+        { MODKEY|ShiftMask,     XK_J,           zoom,           {.f = -1} },
+	{ MODKEY|ShiftMask,	XK_T,		zoomreset,	{.f =  0} },
+	{ MODKEY|ShiftMask,     XK_U,           zoom,           {.f = +2} },
+	{ MODKEY|ShiftMask,     XK_D,           zoom,           {.f = -2} },
+	{ MODKEY|ShiftMask,     XK_Return,      newterm,        {.i =  0} },
 };
 
 /*
