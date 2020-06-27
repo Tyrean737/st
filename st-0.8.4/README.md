@@ -19,7 +19,7 @@ Some additional bindings:
 + Paste -- Shift+Insert
 
 Used patches can be found in '/patches/'. The utilized official patches (in '/patches/all-patches/') are combined into one file '/patches/st-all-patches.diff'. This can be applied
-to the original st-0.8.4 folder from 'st.suckless.org' as describe din its header.
+to the original 'st-0.8.4' folder from 'st.suckless.org' as described in its header.
 
 
 If Transparency is not working try removing the 'vsync' line in
