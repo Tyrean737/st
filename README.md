@@ -23,3 +23,11 @@ The applied official patches are stored in '/patches/main-patches/' and are comb
 
 If Transparency is not working try removing the 'vsync' line in
 ~/.config/picom.conf and run 'picom -b' to start compton in the background.
+
+## Required dependencies
+
++ make
++ fontconfig
++ libX11
++ libXft
++ composite manager (`xcompmgr`, `picom`, etc.) for transparency

@@ -1,5 +1,5 @@
 This diff files can be used on the standard st-0.8.4 version from 'st.suckless.org'.
-It includes the 'st-alpha-0.8.2', 'st-newterm-0.8.2', 'st-scrollback-20200419-72e3f6c.diff' and 'st-xresources-20200604-9ba7ecf' patches.
+It includes the 'st-alpha-0.8.2', 'st-newterm-0.8.2', 'st-scrollback-20200419-72e3f6c.diff', 'st-xresources-20200604-9ba7ecf' and 'st-w3m-0.8.3' patches.
 
 Does NOT include customisations like terminal/cursor colors or key bindings.
 
@@ -11,9 +11,9 @@ Applying with:
 	patch < PATH_TO/st-main-patches.diff
 
 
-diff -ruN backup/config.def.h st-0.8.4/config.def.h
---- backup/config.def.h	2020-06-27 14:35:15.364858131 +0200
-+++ st-0.8.4/config.def.h	2020-06-27 15:04:01.411269345 +0200
+diff -ruN orig/config.def.h st-0.8.4/config.def.h
+--- orig/config.def.h	2020-06-29 15:55:11.201898759 +0200
++++ st-0.8.4/config.def.h	2020-06-29 15:55:51.155588707 +0200
 @@ -93,6 +93,9 @@
   */
  unsigned int tabspaces = 8;
@@ -94,9 +94,9 @@ diff -ruN backup/config.def.h st-0.8.4/config.def.h
  };
 
  /*
-diff -ruN backup/config.def.h.orig st-0.8.4/config.def.h.orig
---- backup/config.def.h.orig	1970-01-01 01:00:00.000000000 +0100
-+++ st-0.8.4/config.def.h.orig	2020-06-27 15:03:53.261393234 +0200
+diff -ruN orig/config.def.h.orig st-0.8.4/config.def.h.orig
+--- orig/config.def.h.orig	1970-01-01 01:00:00.000000000 +0100
++++ st-0.8.4/config.def.h.orig	2020-06-29 15:55:51.155588707 +0200
 @@ -0,0 +1,479 @@
 +/* See LICENSE file for copyright and license details. */
 +
@@ -577,9 +577,9 @@ diff -ruN backup/config.def.h.orig st-0.8.4/config.def.h.orig
 +	" !\"#$%&'()*+,-./0123456789:;<=>?"
 +	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
 +	"`abcdefghijklmnopqrstuvwxyz{|}~";
-diff -ruN backup/config.mk st-0.8.4/config.mk
---- backup/config.mk	2020-06-27 14:35:15.364858131 +0200
-+++ st-0.8.4/config.mk	2020-06-27 15:03:53.261393234 +0200
+diff -ruN orig/config.mk st-0.8.4/config.mk
+--- orig/config.mk	2020-06-29 15:55:11.201898759 +0200
++++ st-0.8.4/config.mk	2020-06-29 15:55:51.155588707 +0200
 @@ -16,7 +16,7 @@
  INCS = -I$(X11INC) \
         `$(PKG_CONFIG) --cflags fontconfig` \
@@ -589,9 +589,9 @@ diff -ruN backup/config.mk st-0.8.4/config.mk
         `$(PKG_CONFIG) --libs fontconfig` \
         `$(PKG_CONFIG) --libs freetype2`
 
-diff -ruN backup/st.c st-0.8.4/st.c
---- backup/st.c	2020-06-27 14:35:15.368191481 +0200
-+++ st-0.8.4/st.c	2020-06-27 15:00:10.248142977 +0200
+diff -ruN orig/st.c st-0.8.4/st.c
+--- orig/st.c	2020-06-29 15:55:11.205232144 +0200
++++ st-0.8.4/st.c	2020-06-29 15:55:51.158922049 +0200
 @@ -35,6 +35,7 @@
  #define ESC_ARG_SIZ   16
  #define STR_BUF_SIZ   ESC_BUF_SIZ
@@ -941,9 +941,9 @@ diff -ruN backup/st.c st-0.8.4/st.c
  	term.ocx = cx;
  	term.ocy = term.c.y;
  	xfinishdraw();
-diff -ruN backup/st.c.orig st-0.8.4/st.c.orig
---- backup/st.c.orig	1970-01-01 01:00:00.000000000 +0100
-+++ st-0.8.4/st.c.orig	2020-06-27 15:00:04.761728310 +0200
+diff -ruN orig/st.c.orig st-0.8.4/st.c.orig
+--- orig/st.c.orig	1970-01-01 01:00:00.000000000 +0100
++++ st-0.8.4/st.c.orig	2020-06-29 15:55:51.158922049 +0200
 @@ -0,0 +1,2668 @@
 +/* See LICENSE for license details. */
 +#include <ctype.h>
@@ -3613,9 +3613,9 @@ diff -ruN backup/st.c.orig st-0.8.4/st.c.orig
 +	tfulldirt();
 +	draw();
 +}
-diff -ruN backup/st.h st-0.8.4/st.h
---- backup/st.h	2020-06-27 14:35:15.368191481 +0200
-+++ st-0.8.4/st.h	2020-06-27 15:03:53.261393234 +0200
+diff -ruN orig/st.h st-0.8.4/st.h
+--- orig/st.h	2020-06-29 15:55:11.205232144 +0200
++++ st-0.8.4/st.h	2020-06-29 15:55:51.158922049 +0200
 @@ -81,7 +81,10 @@
  void redraw(void);
  void draw(void);
@@ -3632,9 +3632,9 @@ diff -ruN backup/st.h st-0.8.4/st.h
  extern unsigned int defaultfg;
  extern unsigned int defaultbg;
 +extern float alpha;
-diff -ruN backup/st.h.orig st-0.8.4/st.h.orig
---- backup/st.h.orig	1970-01-01 01:00:00.000000000 +0100
-+++ st-0.8.4/st.h.orig	2020-06-27 15:03:30.421747859 +0200
+diff -ruN orig/st.h.orig st-0.8.4/st.h.orig
+--- orig/st.h.orig	1970-01-01 01:00:00.000000000 +0100
++++ st-0.8.4/st.h.orig	2020-06-29 15:55:51.158922049 +0200
 @@ -0,0 +1,128 @@
 +/* See LICENSE for license details. */
 +
@@ -3764,9 +3764,9 @@ diff -ruN backup/st.h.orig st-0.8.4/st.h.orig
 +extern unsigned int tabspaces;
 +extern unsigned int defaultfg;
 +extern unsigned int defaultbg;
-diff -ruN backup/x.c st-0.8.4/x.c
---- backup/x.c	2020-06-27 14:35:15.368191481 +0200
-+++ st-0.8.4/x.c	2020-06-27 15:04:01.411269345 +0200
+diff -ruN orig/x.c st-0.8.4/x.c
+--- orig/x.c	2020-06-29 15:55:11.205232144 +0200
++++ st-0.8.4/x.c	2020-06-29 15:56:05.118933949 +0200
 @@ -14,6 +14,7 @@
  #include <X11/keysym.h>
  #include <X11/Xft/Xft.h>
@@ -3902,7 +3902,16 @@ diff -ruN backup/x.c st-0.8.4/x.c
  	XSetForeground(xw.dpy, dc.gc, dc.col[defaultbg].pixel);
  	XFillRectangle(xw.dpy, xw.buf, dc.gc, 0, 0, win.w, win.h);
 
-@@ -1964,6 +1993,59 @@
+@@ -1595,6 +1624,8 @@
+ int
+ xstartdraw(void)
+ {
++	if (IS_SET(MODE_VISIBLE))
++		XCopyArea(xw.dpy, xw.win, xw.buf, dc.gc, 0, 0, win.w, win.h, 0, 0);
+ 	return IS_SET(MODE_VISIBLE);
+ }
+
+@@ -1964,6 +1995,59 @@
  	}
  }
 
@@ -3962,7 +3971,7 @@ diff -ruN backup/x.c st-0.8.4/x.c
  void
  usage(void)
  {
-@@ -1988,6 +2070,9 @@
+@@ -1988,6 +2072,9 @@
  	case 'a':
  		allowaltscreen = 0;
  		break;
@@ -3972,7 +3981,7 @@ diff -ruN backup/x.c st-0.8.4/x.c
  	case 'c':
  		opt_class = EARGF(usage());
  		break;
-@@ -2037,6 +2122,11 @@
+@@ -2037,6 +2124,11 @@
 
  	setlocale(LC_CTYPE, "");
  	XSetLocaleModifiers("");
@@ -3984,10 +3993,10 @@ diff -ruN backup/x.c st-0.8.4/x.c
  	cols = MAX(cols, 1);
  	rows = MAX(rows, 1);
  	tnew(cols, rows);
-diff -ruN backup/x.c.orig st-0.8.4/x.c.orig
---- backup/x.c.orig	1970-01-01 01:00:00.000000000 +0100
-+++ st-0.8.4/x.c.orig	2020-06-27 15:03:53.261393234 +0200
-@@ -0,0 +1,2069 @@
+diff -ruN orig/x.c.orig st-0.8.4/x.c.orig
+--- orig/x.c.orig	1970-01-01 01:00:00.000000000 +0100
++++ st-0.8.4/x.c.orig	2020-06-29 15:55:51.158922049 +0200
+@@ -0,0 +1,2139 @@
 +/* See LICENSE for license details. */
 +#include <errno.h>
 +#include <math.h>
@@ -4004,6 +4013,7 @@ diff -ruN backup/x.c.orig st-0.8.4/x.c.orig
 +#include <X11/keysym.h>
 +#include <X11/Xft/Xft.h>
 +#include <X11/XKBlib.h>
++#include <X11/Xresource.h>
 +
 +char *argv0;
 +#include "arg.h"
@@ -4034,6 +4044,19 @@ diff -ruN backup/x.c.orig st-0.8.4/x.c.orig
 +	signed char appkey;    /* application keypad */
 +	signed char appcursor; /* application cursor */
 +} Key;
++
++/* Xresources preferences */
++enum resource_type {
++	STRING = 0,
++	INTEGER = 1,
++	FLOAT = 2
++};
++
++typedef struct {
++	char *name;
++	enum resource_type type;
++	void *dst;
++} ResourcePref;
 +
 +/* X modifiers */
 +#define XK_ANY_MOD    UINT_MAX
@@ -4827,8 +4850,8 @@ diff -ruN backup/x.c.orig st-0.8.4/x.c.orig
 +void
 +xhints(void)
 +{
-+	XClassHint class = {opt_name ? opt_name : termname,
-+	                    opt_class ? opt_class : termname};
++	XClassHint class = {opt_name ? opt_name : "st",
++	                    opt_class ? opt_class : "St"};
 +	XWMHints wm = {.flags = InputHint, .input = 1};
 +	XSizeHints *sizeh;
 +
@@ -5105,8 +5128,6 @@ diff -ruN backup/x.c.orig st-0.8.4/x.c.orig
 +	XWindowAttributes attr;
 +	XVisualInfo vis;
 +
-+	if (!(xw.dpy = XOpenDisplay(NULL)))
-+		die("can't open display\n");
 +	xw.scr = XDefaultScreen(xw.dpy);
 +
 +	if (!(opt_embed && (parent = strtol(opt_embed, NULL, 0)))) {
@@ -5971,6 +5992,59 @@ diff -ruN backup/x.c.orig st-0.8.4/x.c.orig
 +	}
 +}
 +
++int
++resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
++{
++	char **sdst = dst;
++	int *idst = dst;
++	float *fdst = dst;
++
++	char fullname[256];
++	char fullclass[256];
++	char *type;
++	XrmValue ret;
++
++	snprintf(fullname, sizeof(fullname), "%s.%s",
++			opt_name ? opt_name : "st", name);
++	snprintf(fullclass, sizeof(fullclass), "%s.%s",
++			opt_class ? opt_class : "St", name);
++	fullname[sizeof(fullname) - 1] = fullclass[sizeof(fullclass) - 1] = '\0';
++
++	XrmGetResource(db, fullname, fullclass, &type, &ret);
++	if (ret.addr == NULL || strncmp("String", type, 64))
++		return 1;
++
++	switch (rtype) {
++	case STRING:
++		*sdst = ret.addr;
++		break;
++	case INTEGER:
++		*idst = strtoul(ret.addr, NULL, 10);
++		break;
++	case FLOAT:
++		*fdst = strtof(ret.addr, NULL);
++		break;
++	}
++	return 0;
++}
++
++void
++config_init(void)
++{
++	char *resm;
++	XrmDatabase db;
++	ResourcePref *p;
++
++	XrmInitialize();
++	resm = XResourceManagerString(xw.dpy);
++	if (!resm)
++		return;
++
++	db = XrmGetStringDatabase(resm);
++	for (p = resources; p < resources + LEN(resources); p++)
++		resource_load(db, p->name, p->type, p->dst);
++}
++
 +void
 +usage(void)
 +{
@@ -6047,6 +6121,11 @@ diff -ruN backup/x.c.orig st-0.8.4/x.c.orig
 +
 +	setlocale(LC_CTYPE, "");
 +	XSetLocaleModifiers("");
++
++	if(!(xw.dpy = XOpenDisplay(NULL)))
++		die("Can't open display\n");
++
++	config_init();
 +	cols = MAX(cols, 1);
 +	rows = MAX(rows, 1);
 +	tnew(cols, rows);
