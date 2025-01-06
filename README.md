@@ -19,7 +19,7 @@ Some additional bindings:
 + Paste -- Shift+Insert
 
 The applied official patches are stored in '/patches/main-patches/' and are combined in '/patches/st-main-patches.diff'. Customization was done with
-'/patches/st-personalization.diff', as described in the header.
+'/patches/st-personalization.diff', as described in the header. The colors in st-personalization are out-of-date (not working properly).
 
 If Transparency is not working try removing the 'vsync' line in
 ~/.config/picom.conf and run 'picom -b' to start compton in the background.
